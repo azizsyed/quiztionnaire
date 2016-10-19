@@ -47,7 +47,7 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
-      path: '/question',
+      path: '/question/:id',
       name: 'questionPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

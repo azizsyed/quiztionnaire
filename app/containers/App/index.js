@@ -17,11 +17,12 @@ import Footer from 'components/Footer';
 import Banner from './banner-metal.jpg';
 import A from 'components/A';
 
+import 'bulma/css/bulma.css';
 import styles from './styles.css';
 
 function App(props) {
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} content`}>
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"
@@ -32,6 +33,7 @@ function App(props) {
       <A className={styles.logoWrapper} href="https://twitter.com/mxstbr">
         <Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />
       </A>
+      fdfasdfas
       {React.Children.toArray(props.children)}
       <Footer />
     </div>

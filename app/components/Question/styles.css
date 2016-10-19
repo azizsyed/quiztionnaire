@@ -1,0 +1,11 @@
+.question {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.part {
+  flex-grow: 1;
+  flex-shrink: 0;
+  text-align: center;
+}
