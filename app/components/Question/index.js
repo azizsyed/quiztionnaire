@@ -9,26 +9,19 @@ function Question(props) {
   return (
     <div className={styles.questionWrapper}>
 
-      <div className="columns">
-        <div className="column is-three-quarters">
-          <h2>Question</h2>
-          <div className="columns is-mobile">
-            {parts.map((part) =>
-              <div className="column"><Part {...part} /></div>
-            )}
-          </div>
-        </div>
-        <div className="column">
-          <h2>Answers</h2>
-          <div className="columns is-mobile is-gapless">
-            {answers.map((answerChoice) =>
-              <div className="column"><a className="button is-primary is-outlined">{answerChoice}</a></div>
-            )}
-          </div>
-          R
-        </div>
+      <h2>Question</h2>
+      <div className="columns is-mobile">
+        {parts.map((part) =>
+          <div className="column"><Part {...part} /></div>
+        )}
       </div>
 
+      <h2>Answers</h2>
+      <div className="columns is-mobile is-gapless">
+        {answers.map((answerChoice) =>
+          <div className="column"><a className="button is-primary is-outlined">{answerChoice}</a></div>
+        )}
+      </div>
 
       <h2>Answer Input</h2>
       <div className="columns">
@@ -40,6 +33,7 @@ function Question(props) {
           </p>
         </div>
       </div>
+
       <h2>Actions</h2>
       <div className="columns is-mobile">
         <div className="column">

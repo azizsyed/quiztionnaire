@@ -14,7 +14,7 @@ const mockQuestions = {
         },
         {
           display: null,
-          type: '',
+          type: 'answer',
         },
         {
           display: '=',
@@ -53,6 +53,66 @@ const mockQuestions = {
         {
           display: null,
           type: 'answer',
+        },
+      ],
+      partType: 'EQUATION',
+      answer: 6,
+      hint: null,
+      version: 'version',
+      tags: [],
+    },
+    {
+      answers: [8, 9, 10, 11, 12],
+      parts: [
+        {
+          display: '2',
+          type: 'constant',
+        },
+        {
+          display: '*',
+          type: 'operator',
+        },
+        {
+          display: '5',
+          type: 'constant',
+        },
+        {
+          display: '=',
+          type: 'operator',
+        },
+        {
+          display: null,
+          type: 'answer',
+        },
+      ],
+      partType: 'EQUATION',
+      answer: 10,
+      hint: null,
+      version: 'version',
+      tags: [],
+    },
+    {
+      answers: [1, 2, 3, 4, 5],
+      parts: [
+        {
+          display: '8',
+          type: 'constant',
+        },
+        {
+          display: '/',
+          type: 'operator',
+        },
+        {
+          display: null,
+          type: 'answer',
+        },
+        {
+          display: '=',
+          type: 'operator',
+        },
+        {
+          display: '4',
+          type: 'constant',
         },
       ],
       partType: 'EQUATION',

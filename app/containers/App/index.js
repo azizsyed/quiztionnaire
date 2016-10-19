@@ -18,6 +18,7 @@ import Banner from './banner-metal.jpg';
 import A from 'components/A';
 
 import 'bulma/css/bulma.css';
+import 'typicons.font';
 import styles from './styles.css';
 
 function App(props) {
