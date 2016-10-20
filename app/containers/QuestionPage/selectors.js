@@ -29,13 +29,15 @@ const selectStatus = createSelector(
   (substate) => substate.get('status')
 );
 
-const selectCurrentQuestion = createSelector(
+const selectCurrentIndex = createSelector(
   selectQuestionPageDomain(),
+  (substate) => substate.get('currentIndex')
+);
+
+const selectCurrentQuestion = createSelector(
+  selectCurrentIndex,
   selectQuestions,
-  (substate, questions) => {
-    const currentIndex = substate.get('currentIndex');
-    return currentIndex === -1 ? null : questions[currentIndex];
-  }
+  (currentIndex, questions) => (currentIndex === -1 ? null : questions[currentIndex])
 );
 
 /**

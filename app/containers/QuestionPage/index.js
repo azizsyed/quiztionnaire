@@ -10,8 +10,9 @@ import selectQuestionPage from './selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
-import Question from 'components/Question';
 import Button from 'components/Button';
+import Question from 'components/Question';
+import TestOptions from 'components/TestOptions';
 
 import { STATUS } from './reducer';
 
@@ -53,10 +54,23 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
         <h1>{status === STATUS.TEST_IN_PROGRESS && 'TEST_IN_PROGRESS'}</h1>
         <h1>{status === STATUS.TEST_COMPLETE && 'TEST_COMPLETE'}</h1>
         <h1>{status === STATUS.TEST_CANCELLED && 'TEST_CANCELLED'}</h1>
-        <progress className="progress is-warning" value="75" max="100">75%</progress>
+
+        {status === STATUS.TEST_CANCELLED &&
+          <div>
+            You have cancelled the test. Restart or return to main menu.
+          </div>
+        }
+
+        {(status === STATUS.READY || status === STATUS.TEST_CANCELLED) && <TestOptions />}
+
+        {status === STATUS.TEST_IN_PROGRESS &&
         <div>
-          {currentQuestion && <Question {...currentQuestion} onAnswer={dispatchAnswerQuestion} />}
+          <progress className="progress is-warning" value="75" max="100">75%</progress>
+          <div>
+            {currentQuestion && <Question {...currentQuestion} onAnswer={dispatchAnswerQuestion} />}
+          </div>
         </div>
+        }
         <Button onClick={handleStart}>Start Test</Button>
         <Button onClick={handleStop}>Stop Test</Button>
       </div>
