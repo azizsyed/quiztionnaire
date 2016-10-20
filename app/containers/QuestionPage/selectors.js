@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the questionPage state domain
+ * Direct selector to the question state domain
  */
-const selectQuestionPageDomain = () => (state) => state.get('questionPage');
+const selectQuestionPageDomain = () => (state) => state.get('question');
 
 // const selectParamsDomain = () => (state) => state;
 

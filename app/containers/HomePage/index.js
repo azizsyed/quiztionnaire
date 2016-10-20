@@ -59,6 +59,10 @@ export class HomePage extends React.Component {
   openFeaturesPage = () => {
     this.openRoute('/features');
   };
+  /**
+   * Changed route to '/features'
+   */
+  openQuestionPage = (testId, questionId) => () => this.openRoute(`/question/${testId}/${questionId}`);
 
   render() {
     let mainContent = null;
@@ -79,6 +83,29 @@ export class HomePage extends React.Component {
       mainContent = (<List items={this.props.repos} component={RepoListItem} />);
     }
 
+    const tests = [
+      {
+        id: '1234',
+        questionSetId: 'q.1234',
+        options: {
+          timeLimit: 500, // { Numeric: [0-max_tbd] }
+          targetScore: 70, // {Number percentage [0..100]}
+          allowHints: true, // { Boolean }
+        },
+        title: 'Test #1',
+      },
+      {
+        id: '5678',
+        questionSetId: 'q.5678',
+        options: {
+          timeLimit: 500, // { Numeric: [0-max_tbd] }
+          targetScore: 70, // {Number percentage [0..100]}
+          allowHints: true, // { Boolean }
+        },
+        title: 'Test #2',
+      },
+    ];
+
     return (
       <article>
         <Helmet
@@ -96,6 +123,9 @@ export class HomePage extends React.Component {
               <FormattedMessage {...messages.startProjectMessage} />
             </p>
           </section>
+          {tests.map((test) =>
+            <Button handleRoute={this.openQuestionPage(test.id, test.questionSetId)}>{test.title}</Button>
+          )}
           <section className={styles.textSection}>
             <H2>
               <FormattedMessage {...messages.trymeHeader} />

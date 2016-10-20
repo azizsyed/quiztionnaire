@@ -44,7 +44,7 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
     };
 
     return (
-      <div className={styles.questionPage}>
+      <div className={styles.question}>
         <FormattedMessage {...messages.header} />
         <h1>{status === STATUS.WAITING && 'WAITING'}</h1>
         <h1>{status === STATUS.FETCHING && 'FETCHING'}</h1>

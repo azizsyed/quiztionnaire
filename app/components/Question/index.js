@@ -6,21 +6,29 @@ import styles from './styles.css';
 function Question(props) {
   const { answers, parts, answer, onAnswer } = props;
 
+        // is-full-desktop
+
+
   return (
     <div className={styles.questionWrapper}>
 
-      <h2>Question</h2>
-      <div className="columns is-mobile">
-        {parts.map((part) =>
-          <div className="column"><Part {...part} /></div>
-        )}
-      </div>
-
-      <h2>Answers</h2>
-      <div className="columns is-mobile is-gapless">
-        {answers.map((answerChoice) =>
-          <div className="column"><a className="button is-primary is-outlined">{answerChoice}</a></div>
-        )}
+      <div className="columns">
+        <div className="column is-9">
+          <h2>Question</h2>
+          <div className="columns is-mobile">
+            {parts.map((part) =>
+              <div className="column"><Part {...part} /></div>
+            )}
+          </div>
+        </div>
+        <div className="column is-3">
+          <h2>Answers</h2>
+          <div className="columns is-mobile is-gapless is-multiline">
+            {answers.map((answerChoice) =>
+              <div className="column is-full-desktop is-full-tablet"><a className="button is-primary is-outlined">{answerChoice}</a></div>
+            )}
+          </div>
+        </div>
       </div>
 
       <h2>Answer Input</h2>
