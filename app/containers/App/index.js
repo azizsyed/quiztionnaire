@@ -18,7 +18,6 @@ import Banner from './banner-metal.jpg';
 import A from 'components/A';
 
 import 'bulma/css/bulma.css';
-import 'typicons.font';
 import styles from './styles.css';
 
 function App(props) {
@@ -31,10 +30,7 @@ function App(props) {
           { name: 'description', content: 'A React.js Boilerplate application' },
         ]}
       />
-      <A className={styles.logoWrapper} href="https://twitter.com/mxstbr">
-        <Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />
-      </A>
-      fdfasdfas
+      <h1>Quiztionnaire</h1>
       {React.Children.toArray(props.children)}
       <Footer />
     </div>

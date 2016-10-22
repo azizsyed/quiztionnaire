@@ -37,7 +37,9 @@ const selectCurrentIndex = createSelector(
 const selectCurrentQuestion = createSelector(
   selectCurrentIndex,
   selectQuestions,
-  (currentIndex, questions) => (currentIndex === -1 ? null : questions[currentIndex])
+  (currentIndex, questions) => {
+    return (currentIndex === -1 ? null : questions[currentIndex])
+  }
 );
 
 /**
@@ -48,15 +50,13 @@ const selectQuestionPage = () => createSelector(
   selectCurrentQuestion,
   selectQuestions,
   selectStatus,
-  (currentQuestion, questions, status) => ({
+  selectCurrentIndex,
+  (currentQuestion, questions, status, currentIndex) => ({
     currentQuestion,
+    currentIndex,
     questions,
     status,
   })
 );
 
 export default selectQuestionPage;
-export {
-  // selectQuestionPageDomain,
-  // selectQuestionId,
-};

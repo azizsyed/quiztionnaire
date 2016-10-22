@@ -121,6 +121,36 @@ const mockQuestions = {
       version: 'version',
       tags: [],
     },
+    {
+      answers: [],
+      parts: [
+        {
+          display: '2',
+          type: 'constant',
+        },
+        {
+          display: '/',
+          type: 'operator',
+        },
+        {
+          display: null,
+          type: 'answer',
+        },
+        {
+          display: '=',
+          type: 'operator',
+        },
+        {
+          display: '2',
+          type: 'constant',
+        },
+      ],
+      partType: 'EQUATION',
+      answer: 1,
+      hint: null,
+      version: 'version',
+      tags: [],
+    },
   ],
   version: 'version',
   tags: [],
@@ -129,6 +159,7 @@ const mockQuestions = {
 };
 
 export const request = (requestURL) =>
+  // const url2 = 'http://api-quiz.azizsyed.com/test/test2';
   new Promise((resolve, reject) => {
     const successTimer = setTimeout(() => {
       clearTimeout(failureTimer);

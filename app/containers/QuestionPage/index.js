@@ -34,7 +34,7 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
   }
 
   render() {
-    const { dispatchAnswerQuestion, currentQuestion, status, dispatchStartTest, dispatchStopTest } = this.props;
+    const { questions, dispatchAnswerQuestion, currentIndex, currentQuestion, status, dispatchStartTest, dispatchStopTest } = this.props;
 
     const handleStart = () => {
       dispatchStartTest();
@@ -63,13 +63,21 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
 
         {(status === STATUS.READY || status === STATUS.TEST_CANCELLED) && <TestOptions />}
 
-        {status === STATUS.TEST_IN_PROGRESS &&
-        <div>
-          <progress className="progress is-warning" value="75" max="100">75%</progress>
+        {(status === STATUS.TEST_CANCELLED || status === STATUS.TEST_COMPLETE) &&
           <div>
-            {currentQuestion && <Question {...currentQuestion} onAnswer={dispatchAnswerQuestion} />}
+            {questions.map((question, index) => {
+              return <p>{index}: {question.answer} -> {question.userAnswer}</p>
+            })}
           </div>
-        </div>
+        }
+
+        {status === STATUS.TEST_IN_PROGRESS &&
+          <div>
+            <progress className="progress is-warning" value="75" max="100">75%</progress>
+            <div>
+              {currentQuestion && <Question {...currentQuestion} id={currentIndex} onAnswer={dispatchAnswerQuestion} />}
+            </div>
+          </div>
         }
         <Button onClick={handleStart}>Start Test</Button>
         <Button onClick={handleStop}>Stop Test</Button>
@@ -81,9 +89,11 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
 QuestionPage.propTypes = {
   dispatchLoadQuestion: PropTypes.func.isRequired,
   dispatchAnswerQuestion: PropTypes.func.isRequired,
+  currentIndex: PropTypes.number.isRequired,
+  questions: PropTypes.array,
   currentQuestion: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
-  status: PropTypes.object.isRequired,
+  status: PropTypes.symbol.isRequired,
   dispatchStartTest: PropTypes.func.isRequired,
   dispatchStopTest: PropTypes.func.isRequired,
 };
@@ -93,7 +103,7 @@ const mapStateToProps = selectQuestionPage;
 function mapDispatchToProps(dispatch) {
   return {
     dispatchLoadQuestion: (id) => dispatch(loadQuestion(id)),
-    dispatchAnswerQuestion: () => dispatch(answerQuestion()),
+    dispatchAnswerQuestion: (id, answer) => dispatch(answerQuestion({ answer, id, })),
     dispatchStartTest: () => dispatch(startTest()),
     dispatchStopTest: () => dispatch(stopTest()),
     dispatch,
