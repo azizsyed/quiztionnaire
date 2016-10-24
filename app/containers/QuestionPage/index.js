@@ -12,6 +12,8 @@ import messages from './messages';
 import styles from './styles.css';
 import Button from 'components/Button';
 import Question from 'components/Question';
+import TestProgress from 'components/TestProgress';
+import TestResults from 'components/TestResults';
 import TestOptions from 'components/TestOptions';
 
 import { STATUS } from './reducer';
@@ -34,7 +36,7 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
   }
 
   render() {
-    const { questions, dispatchAnswerQuestion, currentIndex, currentQuestion, status, dispatchStartTest, dispatchStopTest } = this.props;
+    const { questions, isOnlySubmit, dispatchAnswerQuestion, currentIndex, currentQuestion, status, dispatchStartTest, dispatchStopTest } = this.props;
 
     const handleStart = () => {
       dispatchStartTest();
@@ -61,26 +63,35 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
           </div>
         }
 
-        {(status === STATUS.READY || status === STATUS.TEST_CANCELLED) && <TestOptions />}
+        {(status === STATUS.READY || status === STATUS.TEST_CANCELLED) &&
+          <TestOptions />
+        }
 
-        {(status === STATUS.TEST_CANCELLED || status === STATUS.TEST_COMPLETE) &&
-          <div>
-            {questions.map((question, index) => {
-              return <p>{index}: {question.answer} -> {question.userAnswer}</p>
-            })}
-          </div>
+        {(status === STATUS.TEST_COMPLETE || status === STATUS.TEST_CANCELLED) &&
+          <TestResults questions={questions} />
         }
 
         {status === STATUS.TEST_IN_PROGRESS &&
           <div>
-            <progress className="progress is-warning" value="75" max="100">75%</progress>
+            <TestProgress value={75} max={100} />
             <div>
-              {currentQuestion && <Question {...currentQuestion} id={currentIndex} onAnswer={dispatchAnswerQuestion} />}
+              {currentQuestion &&
+                <Question
+                  {...currentQuestion}
+                  id={currentIndex}
+                  onAnswer={dispatchAnswerQuestion}
+                  isOnlySubmit={isOnlySubmit}
+                  onSkip={(e) => {}}
+                  onCancel={handleStop}
+                />
+              }
             </div>
           </div>
         }
-        <Button onClick={handleStart}>Start Test</Button>
-        <Button onClick={handleStop}>Stop Test</Button>
+
+        {status !== STATUS.TEST_IN_PROGRESS &&
+          <Button onClick={handleStart}>Start Test</Button>
+        }
       </div>
     );
   }
@@ -92,6 +103,7 @@ QuestionPage.propTypes = {
   currentIndex: PropTypes.number.isRequired,
   questions: PropTypes.array,
   currentQuestion: PropTypes.object.isRequired,
+  isOnlySubmit: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
   status: PropTypes.symbol.isRequired,
   dispatchStartTest: PropTypes.func.isRequired,

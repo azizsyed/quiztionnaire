@@ -42,6 +42,14 @@ const selectCurrentQuestion = createSelector(
   }
 );
 
+const selectIsOnlySubmit = createSelector(
+  selectCurrentIndex,
+  (selectCurrentIndex) => {
+    // TODO: Replace with actual logic...below is mock/fake
+    return selectCurrentIndex !== 'null';
+  }
+);
+
 /**
  * Default selector used by QuestionPage
  */
@@ -51,11 +59,13 @@ const selectQuestionPage = () => createSelector(
   selectQuestions,
   selectStatus,
   selectCurrentIndex,
-  (currentQuestion, questions, status, currentIndex) => ({
+  selectIsOnlySubmit,
+  (currentQuestion, questions, status, currentIndex, isOnlySubmit) => ({
     currentQuestion,
     currentIndex,
     questions,
     status,
+    isOnlySubmit,
   })
 );
 

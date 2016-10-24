@@ -2,7 +2,7 @@ const mockQuestions = {
   id: 'blah',
   questions: [
     {
-      answers: [1, 2, 3, 2, 3, 2, 3],
+      answers: ['1', '2', '3'],
       parts: [
         {
           display: '1',
@@ -32,7 +32,7 @@ const mockQuestions = {
       tags: [],
     },
     {
-      answers: [5, 6, 7],
+      answers: ['5', '6', '7'],
       parts: [
         {
           display: '2',
@@ -62,7 +62,7 @@ const mockQuestions = {
       tags: [],
     },
     {
-      answers: [8, 9, 10, 11, 12],
+      answers: ['8', '9', '10', '11', '12'],
       parts: [
         {
           display: '2',
@@ -92,7 +92,7 @@ const mockQuestions = {
       tags: [],
     },
     {
-      answers: [1, 2, 3, 4, 5],
+      answers: ['1', '2', '3', '4', '5'],
       parts: [
         {
           display: '8',
@@ -121,36 +121,36 @@ const mockQuestions = {
       version: 'version',
       tags: [],
     },
-    {
-      answers: [],
-      parts: [
-        {
-          display: '2',
-          type: 'constant',
-        },
-        {
-          display: '/',
-          type: 'operator',
-        },
-        {
-          display: null,
-          type: 'answer',
-        },
-        {
-          display: '=',
-          type: 'operator',
-        },
-        {
-          display: '2',
-          type: 'constant',
-        },
-      ],
-      partType: 'EQUATION',
-      answer: 1,
-      hint: null,
-      version: 'version',
-      tags: [],
-    },
+    // {
+    //   answers: [],
+    //   parts: [
+    //     {
+    //       display: '2',
+    //       type: 'constant',
+    //     },
+    //     {
+    //       display: '/',
+    //       type: 'operator',
+    //     },
+    //     {
+    //       display: null,
+    //       type: 'answer',
+    //     },
+    //     {
+    //       display: '=',
+    //       type: 'operator',
+    //     },
+    //     {
+    //       display: '2',
+    //       type: 'constant',
+    //     },
+    //   ],
+    //   partType: 'EQUATION',
+    //   answer: 1,
+    //   hint: null,
+    //   version: 'version',
+    //   tags: [],
+    // },
   ],
   version: 'version',
   tags: [],

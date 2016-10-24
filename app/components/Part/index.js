@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+import Icon from 'components/Icon';
 import styles from './styles.css';
 
 function Part(props) {
-  const { display, type } = props;
+  const { display, type, currentAnswer } = props;
 
   let output = null;
 
@@ -11,23 +12,23 @@ function Part(props) {
   }
   if (type === 'operator') {
     if (display === '-') {
-      output = <span className="icon"><i className="typcn typcn-minus-outline" /></span>;
+      output = <Icon icon="minus-outline" />;
     }
     if (display === '+') {
-      output = <span className="icon"><i className="typcn typcn-plus-outline" /></span>;
+      output = <Icon icon="plus-outline" />;
     }
     if (display === '*') {
-      output = <span className="icon"><i className="typcn typcn-times-outline" /></span>;
+      output = <Icon icon="times-outline" />;
     }
     if (display === '/') {
-      output = <span className="icon"><i className="typcn typcn-divide-outline" /></span>;
+      output = <Icon icon="divide-outline" />;
     }
     if (display === '=') {
-      output = <span className="icon"><i className="typcn typcn-equals-outline" /></span>;
+      output = <Icon icon="equals-outline" />;
     }
   }
   if (type === 'answer') {
-    output = <span className="icon"><a className="button is-danger">?</a></span>;
+    output = <span className="icon"><a className="button is-danger">{currentAnswer || '?'}</a></span>;
   }
 
   return (

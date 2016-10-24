@@ -47,6 +47,9 @@ class Question extends Component {
     this.setState({
       answer
     });
+    if (!this.props.isOnlySubmit){
+      this.props.onAnswer(this.props.id, answer);
+    }
   }
 
   handleChange(event) {
@@ -54,16 +57,25 @@ class Question extends Component {
   }
 
   render() {
-    const { id, answers, parts, answer, onAnswer, userAnswer } = this.props;
+    const { id, answers, parts, answer, onAnswer, onSkip, onCancel, userAnswer, isOnlySubmit } = this.props;
     const { answer: currentAnswer } = this.state;
 
     const hasAnswerChoices = answers.length;
 
     const selectAnswer = this.selectAnswer.bind(this);
 
-    const handleOnAnswer = () => {
+    const handleOnSubmit = () => {
       const { answer } = this.state;
       onAnswer(id, answer);
+    };
+
+    const handleOnSkip = () => {
+      onSkip(id);
+    };
+
+    const handleOnCancel = () => {
+      const { answer } = this.state;
+      onCancel(id);
     };
 
     return (
@@ -74,7 +86,7 @@ class Question extends Component {
             <h2>Question [user answer: {userAnswer}]</h2>
             <div className="columns is-mobile">
               {parts.map((part) =>
-                <div className="column"><Part {...part} /></div>
+                <div className="column"><Part {...part} currentAnswer={currentAnswer} /></div>
               )}
             </div>
           </div>
@@ -99,13 +111,13 @@ class Question extends Component {
         <h2>Actions</h2>
         <div className="columns is-mobile">
           <div className="column">
-            <a className="button is-danger">exit</a>
+            <a className="button is-danger" onClick={handleOnCancel}>exit</a>
           </div>
           <div className="column">
-            <a className="button is-warning">skip</a>
+            <a className="button is-warning" onClick={handleOnSkip}>skip</a>
           </div>
           <div className="column">
-            <button className="button is-primary" onClick={handleOnAnswer}>answer</button>
+            <button className="button is-primary" onClick={handleOnSubmit}>answer</button>
           </div>
         </div>
       </div>
@@ -118,6 +130,7 @@ Question.propTypes = {
   parts: PropTypes.array.isRequired,
   answer: PropTypes.object.isRequired,
   onAnswer: PropTypes.func.isRequired,
+  isOnlySubmit: PropTypes.bool.isRequired
 };
 
 export default Question;
