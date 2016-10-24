@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Button from 'components/Button';
 
 function AnswerList(props) {
 
@@ -16,7 +17,7 @@ function AnswerList(props) {
         <div className="columns is-mobile is-gapless is-multiline">
           {answers.map((answerChoice) =>
             <div className="column is-full-desktop is-full-tablet">
-              <button className="button is-primary is-outlined" onClick={() => onAnswer(answerChoice)}>{answerChoice}</button>
+              <Button classNames={['is-primary', 'is-outlined']} onClick={() => onAnswer(answerChoice)}>{answerChoice}</Button>
             </div>
           )}
         </div>

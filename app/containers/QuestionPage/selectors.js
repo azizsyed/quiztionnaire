@@ -46,7 +46,7 @@ const selectIsOnlySubmit = createSelector(
   selectCurrentIndex,
   (selectCurrentIndex) => {
     // TODO: Replace with actual logic...below is mock/fake
-    return selectCurrentIndex !== 'null';
+    return selectCurrentIndex === 'null';
   }
 );
 

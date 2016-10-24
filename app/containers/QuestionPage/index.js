@@ -18,7 +18,7 @@ import TestOptions from 'components/TestOptions';
 
 import { STATUS } from './reducer';
 
-import { answerQuestion, loadQuestion, startTest, stopTest } from './actions';
+import { answerQuestion, loadQuestion, skipQuestion, startTest, stopTest } from './actions';
 
 export class QuestionPage extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -36,7 +36,7 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
   }
 
   render() {
-    const { questions, isOnlySubmit, dispatchAnswerQuestion, currentIndex, currentQuestion, status, dispatchStartTest, dispatchStopTest } = this.props;
+    const { questions, isOnlySubmit, dispatchAnswerQuestion, dispatchSkipQuestion, currentIndex, currentQuestion, status, dispatchStartTest, dispatchStopTest } = this.props;
 
     const handleStart = () => {
       dispatchStartTest();
@@ -81,7 +81,7 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
                   id={currentIndex}
                   onAnswer={dispatchAnswerQuestion}
                   isOnlySubmit={isOnlySubmit}
-                  onSkip={(e) => {}}
+                  onSkip={dispatchSkipQuestion}
                   onCancel={handleStop}
                 />
               }
@@ -116,6 +116,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatchLoadQuestion: (id) => dispatch(loadQuestion(id)),
     dispatchAnswerQuestion: (id, answer) => dispatch(answerQuestion({ answer, id, })),
+    dispatchSkipQuestion: (id) => dispatch(skipQuestion({ id, })),
     dispatchStartTest: () => dispatch(startTest()),
     dispatchStopTest: () => dispatch(stopTest()),
     dispatch,

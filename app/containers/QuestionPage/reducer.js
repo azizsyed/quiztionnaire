@@ -38,6 +38,8 @@ const initialState = fromJS({
 const setAnswer = (state, id, answer) => {
   const questions = state.get('questions');
   const question = questions[id];
+  // TODO: Allow 'pushing' answer to userAnswer
+  // TODO: Include timestamp
   question.userAnswer = answer;
 
   return state.set('questions', questions);
@@ -52,6 +54,7 @@ const skipQuestion = (state, { id }) => {
 };
 
 const nextQuestionIndex = (state) => {
+  // TODO: Prevent next question if incorrect
   const nextIndex = state.get('currentIndex') + 1;
   const numQuestions = state.get('questions').length;
   const updatedstate = state.set('currentIndex', nextIndex);
@@ -79,8 +82,7 @@ function questionPageReducer(state = initialState, action) {
     case SET_QUESTIONS:
       return state.set('questions', action.payload);
     case SKIP_QUESTION:
-      return skipQuestion(state, action.payload)
-        .set('currentIndex', state.get('currentIndex') + 1);
+      return nextQuestionIndex(skipQuestion(state, action.payload));
     case START_TEST:
       return state
         .set('currentIndex', 0)

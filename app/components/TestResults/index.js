@@ -6,12 +6,11 @@ import styles from './styles.css';
 function TestResults(props) {
   const { questions } = props;
 
+  // TODO: Wire up
   const results = {
     numCorrect: 3,
     numSkipped: 4,
   }
-
-  
 
   const score = (results.numCorrect / questions.length*100);
 

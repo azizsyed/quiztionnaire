@@ -48,6 +48,7 @@ class Question extends Component {
     this.setState({
       answer
     });
+    debugger;
     if (!this.props.isOnlySubmit){
       this.props.onAnswer(this.props.id, answer);
     }
@@ -58,8 +59,8 @@ class Question extends Component {
   }
 
   render() {
-    const { id, answers, parts, answer, onAnswer, onSkip, onCancel, userAnswer, isOnlySubmit } = this.props;
-    const { answer: currentAnswer } = this.state;
+    const { id, answers, parts, onAnswer, onSkip, onCancel, userAnswer, isOnlySubmit } = this.props;
+    const { answer } = this.state;
 
     const hasAnswerChoices = answers.length;
 
@@ -81,13 +82,13 @@ class Question extends Component {
 
     return (
       <div className={styles.questionWrapper}>
-        {this.state.elapsed} / {currentAnswer}
+        {this.state.elapsed}
         <div className="columns">
           <div className={`column is-${hasAnswerChoices ? '10' : 'full'}`}>
             <h2>Question [user answer: {userAnswer}]</h2>
             <div className="columns is-mobile">
               {parts.map((part) =>
-                <div className="column"><Part {...part} currentAnswer={currentAnswer} /></div>
+                <div className="column"><Part {...part} currentAnswer={answer} /></div>
               )}
             </div>
           </div>
@@ -100,7 +101,7 @@ class Question extends Component {
             <div className="columns">
               <div className="column">
                 <p className="control has-icon has-icon-right">
-                  <input className="input is-success" type="text" placeholder="Text input" value={currentAnswer || ''} onChange={(e) => this.handleChange(e)}/>
+                  <input className="input is-success" type="text" placeholder="Text input" value={answer || ''} onChange={(e) => this.handleChange(e)}/>
                   <i className="fa fa-check" />
                   <span className="help is-success">This username is available</span>
                 </p>

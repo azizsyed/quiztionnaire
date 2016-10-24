@@ -15,18 +15,18 @@ function Button(props) {
 
   // Render an anchor tag
   let button = (
-    <a className={`button ${classNames.join('-')}`} href={props.href} onClick={props.onClick}>
+    <a className={`button ${styles.button} ${classNames.join(' ')}`} href={props.href} onClick={props.onClick || props.handleRoute}>
       {Children.toArray(props.children)}
     </a>
   );
 
   // If the Button has a handleRoute prop, we want to render a button
   if (props.handleRoute) {
-    button = (
-      <button className={className} onClick={props.handleRoute}>
-        {Children.toArray(props.children)}
-      </button>
-    );
+    // button = (
+    //   <button className={className} onClick={props.handleRoute}>
+    //     {Children.toArray(props.children)}
+    //   </button>
+    // );
   }
 
   return (
