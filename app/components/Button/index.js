@@ -11,11 +11,11 @@ import React, { PropTypes, Children } from 'react';
 import styles from './styles.css';
 
 function Button(props) {
-  const className = props.className ? props.className : styles.button;
+  const { classNames = [] } = props;
 
   // Render an anchor tag
   let button = (
-    <a className={className} href={props.href} onClick={props.onClick}>
+    <a className={`button ${classNames.join('-')}`} href={props.href} onClick={props.onClick}>
       {Children.toArray(props.children)}
     </a>
   );

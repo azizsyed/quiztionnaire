@@ -14,9 +14,8 @@ import {
   SKIP_QUESTION,
   START_TEST,
   STOP_TEST,
+  SKIPPED,
 } from './constants';
-
-const SKIPPED = Symbol('SKIPPED');
 
 export const STATUS = {
   WAITING: Symbol('WAITING'),

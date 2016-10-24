@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import AnswerList from 'components/AnswerList';
+import Button from 'components/Button';
 import Part from 'components/Part';
 import styles from './styles.css';
 
@@ -111,13 +112,13 @@ class Question extends Component {
         <h2>Actions</h2>
         <div className="columns is-mobile">
           <div className="column">
-            <a className="button is-danger" onClick={handleOnCancel}>exit</a>
+            <Button classNames={['is-danger']} onClick={handleOnCancel}>exit</Button>
           </div>
           <div className="column">
-            <a className="button is-warning" onClick={handleOnSkip}>skip</a>
+            <Button classNames={['is-warning']} onClick={handleOnSkip}>skip</Button>
           </div>
           <div className="column">
-            <button className="button is-primary" onClick={handleOnSubmit}>answer</button>
+            <Button classNames={['is-primary']} onClick={handleOnSubmit}>next</Button>
           </div>
         </div>
       </div>

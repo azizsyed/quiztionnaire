@@ -15,3 +15,5 @@ export const QUESTIONS_LOADING_ERROR = 'app/QuestionPage/QUESTIONS_LOADING_ERROR
 
 export const START_TEST = 'app/QuestionPage/START_TEST';
 export const STOP_TEST = 'app/QuestionPage/STOP_TEST';
+
+export const SKIPPED = Symbol('SKIPPED');
