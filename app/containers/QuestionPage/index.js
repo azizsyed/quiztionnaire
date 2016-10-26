@@ -46,17 +46,10 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
       dispatchStopTest();
     };
 
+    const progress = null;// <TestProgress value={75} max={100} />
+
     return (
       <div className={styles.question}>
-        <FormattedMessage {...messages.header} />
-        <h1>{status === STATUS.WAITING && 'WAITING'}</h1>
-        <h1>{status === STATUS.FETCHING && 'FETCHING'}</h1>
-        <h1>{status === STATUS.READY && 'READY'}</h1>
-        <h1>{status === STATUS.ERROR && 'ERROR'}</h1>
-        <h1>{status === STATUS.TEST_IN_PROGRESS && 'TEST_IN_PROGRESS'}</h1>
-        <h1>{status === STATUS.TEST_COMPLETE && 'TEST_COMPLETE'}</h1>
-        <h1>{status === STATUS.TEST_CANCELLED && 'TEST_CANCELLED'}</h1>
-
         {status === STATUS.TEST_CANCELLED &&
           <div>
             You have cancelled the test. Restart or return to main menu.
@@ -73,7 +66,7 @@ export class QuestionPage extends Component { // eslint-disable-line react/prefe
 
         {status === STATUS.TEST_IN_PROGRESS &&
           <div>
-            <TestProgress value={75} max={100} />
+            {progress}
             <div>
               {currentQuestion &&
                 <Question
@@ -115,8 +108,8 @@ const mapStateToProps = selectQuestionPage;
 function mapDispatchToProps(dispatch) {
   return {
     dispatchLoadQuestion: (id) => dispatch(loadQuestion(id)),
-    dispatchAnswerQuestion: (id, answer) => dispatch(answerQuestion({ answer, id, })),
-    dispatchSkipQuestion: (id) => dispatch(skipQuestion({ id, })),
+    dispatchAnswerQuestion: (id, answer, time) => dispatch(answerQuestion({ answer, id, time })),
+    dispatchSkipQuestion: (id, time) => dispatch(skipQuestion({ id, time })),
     dispatchStartTest: () => dispatch(startTest()),
     dispatchStopTest: () => dispatch(stopTest()),
     dispatch,

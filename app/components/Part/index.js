@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Button from 'components/Button';
 import Icon from 'components/Icon';
 import styles from './styles.css';
 
@@ -28,7 +29,7 @@ function Part(props) {
     }
   }
   if (type === 'answer') {
-    output = <span className="icon"><a className="button is-danger">{currentAnswer || '?'}</a></span>;
+    output = <span className={`${styles.answerPart}`}>{currentAnswer || '?'}</span>;
   }
 
   return (

@@ -1,3 +1,12 @@
 .partWrapper {
   text-align: center;
+  font-size: 30px;
+}
+
+.answerPart {
+  background-color: #ff3860;
+  color: white;
+  cursor: pointer;
+  line-height: 30px;
+  padding: 15px 30px;
 }

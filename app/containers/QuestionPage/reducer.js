@@ -35,22 +35,34 @@ const initialState = fromJS({
   status: STATUS.WAITING,
 });
 
-const setAnswer = (state, id, answer) => {
+const setAnswer = (state, id, answer, time) => {
   const questions = state.get('questions');
   const question = questions[id];
-  // TODO: Allow 'pushing' answer to userAnswer
-  // TODO: Include timestamp
-  question.userAnswer = answer;
 
-  return state.set('questions', questions);
+  if (!question.userAnswers){
+    question.userAnswers = [];
+  }
+
+  question.userAnswers.push({
+    answer,
+    time
+  });
+
+  const updatedState = state.set('questions', questions);
+  console.log(state.get('questions'));
+  debugger;
+  
+  
+
+  return updatedState;
 }
 
-const answerQuestion = (state, { answer, id }) => {
-  return setAnswer(state, id, answer);
+const answerQuestion = (state, { answer, id, time }) => {
+  return setAnswer(state, id, answer, time);
 };
 
-const skipQuestion = (state, { id }) => {
-  return setAnswer(state, id, SKIPPED);
+const skipQuestion = (state, { id, time }) => {
+  return setAnswer(state, id, SKIPPED, time);
 };
 
 const nextQuestionIndex = (state) => {

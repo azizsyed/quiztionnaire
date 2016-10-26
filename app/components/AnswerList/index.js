@@ -13,10 +13,9 @@ function AnswerList(props) {
   return (
     <div className={className}>
       <div>
-        <h2>Answers</h2>
         <div className="columns is-mobile is-gapless is-multiline">
           {answers.map((answerChoice) =>
-            <div className="column is-full-desktop is-full-tablet">
+            <div className="column">
               <Button classNames={['is-primary', 'is-outlined']} onClick={() => onAnswer(answerChoice)}>{answerChoice}</Button>
             </div>
           )}

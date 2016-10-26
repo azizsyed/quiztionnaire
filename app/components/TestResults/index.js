@@ -14,7 +14,9 @@ function TestResults(props) {
 
   const score = (results.numCorrect / questions.length*100);
 
-  const getIcon = (isCorrect) => <Icon icon={`${isCorrect ? 'weather-sunny' : 'weather-downpour'}`} />
+  const getIcon = (isCorrect) => <Icon icon={`${isCorrect ? 'heart-full-outline ' + styles.correct : 'heart-full-outline ' + styles.incorrect}`} />
+
+  console.log(questions[0]);
 
   return (
     <div>
@@ -69,24 +71,26 @@ function TestResults(props) {
           </tr>
         </tfoot>
         <tbody>
-        {questions.map((question, index) =>
-          <tr>
-            <td>{question.parts.reduce((combined, part) => {
-              let display = part.display;
-              if (part.type === 'answer'){
-                display = `[${question.answer}]`
-              }
-              return combined + display
-            }, '')}</td>
-            <td>{question.answer}</td>
-            <td><ActualAnswer answer={question.userAnswer} /></td>
-            <td className="is-icon">
-              {getIcon(question.answer == question.userAnswer)}
-            </td>
-            <td>tbd</td>
-            <td>tbd</td>
-          </tr>
-        )}
+        {questions.map((question, index) => {
+          return (
+            <tr>
+              <td>{question.parts.reduce((combined, part) => {
+                let display = part.display;
+                if (part.type === 'answer'){
+                  display = `[${question.answer}]`
+                }
+                return combined + display
+              }, '')}</td>
+              <td>{question.answer}</td>
+              <td><ActualAnswer answers={question.userAnswers} /></td>
+              <td className="is-icon">
+                {getIcon(question.answer == question.userAnswer)}
+              </td>
+              <td>tbd</td>
+              <td>tbd</td>
+            </tr>
+          );
+        })}
         </tbody>
       </table>
     </div>

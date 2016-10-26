@@ -11,6 +11,7 @@ class Question extends Component {
     this.state = {
       elapsed: 0,
       answer: null,
+      start: null,
     };
     this.timer = null;
   }
@@ -39,6 +40,7 @@ class Question extends Component {
       this.setState({
         elapsed: 0,
         answer: null,
+        start: new Date(),
       });
       this.tick();
     }
@@ -48,9 +50,13 @@ class Question extends Component {
     this.setState({
       answer
     });
-    debugger;
+
     if (!this.props.isOnlySubmit){
-      this.props.onAnswer(this.props.id, answer);
+      this.props.onAnswer(
+        this.props.id,
+        answer,
+        new Date() - this.state.start
+      );
     }
   }
 
@@ -60,7 +66,7 @@ class Question extends Component {
 
   render() {
     const { id, answers, parts, onAnswer, onSkip, onCancel, userAnswer, isOnlySubmit } = this.props;
-    const { answer } = this.state;
+    const { answer, elapsed } = this.state;
 
     const hasAnswerChoices = answers.length;
 
@@ -72,7 +78,8 @@ class Question extends Component {
     };
 
     const handleOnSkip = () => {
-      onSkip(id);
+
+      onSkip(id, new Date() - this.state.start);
     };
 
     const handleOnCancel = () => {
@@ -82,35 +89,31 @@ class Question extends Component {
 
     return (
       <div className={styles.questionWrapper}>
-        {this.state.elapsed}
-        <div className="columns">
-          <div className={`column is-${hasAnswerChoices ? '10' : 'full'}`}>
-            <h2>Question [user answer: {userAnswer}]</h2>
-            <div className="columns is-mobile">
-              {parts.map((part) =>
-                <div className="column"><Part {...part} currentAnswer={answer} /></div>
-              )}
+
+        <div className="tile is-ancestor">
+          <div className="tile is-vertical is-10">
+            <div className="tile is-parent">
+              <article className="tile is-child notification is-danger">
+                <div className="columns">
+                  <div className={`column`}>
+                    <div className="columns is-mobile">
+                      {parts.map((part) =>
+                        <div className="column"><Part {...part} currentAnswer={answer} /></div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
-          <AnswerList show={hasAnswerChoices} answers={answers} className="column is-2" onAnswer={selectAnswer} />
+          <div className="tile is-parent">
+            <article className="tile is-child notification is-info">
+              <AnswerList show={hasAnswerChoices} answers={answers} className="column is-2" onAnswer={selectAnswer} />
+            </article>
+          </div>
         </div>
 
-        {!hasAnswerChoices &&
-          <div>
-            <h2>Answer Input</h2>
-            <div className="columns">
-              <div className="column">
-                <p className="control has-icon has-icon-right">
-                  <input className="input is-success" type="text" placeholder="Text input" value={answer || ''} onChange={(e) => this.handleChange(e)}/>
-                  <i className="fa fa-check" />
-                  <span className="help is-success">This username is available</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        }
-
-        <h2>Actions</h2>
+        <h2>Actions {elapsed}</h2>
         <div className="columns is-mobile">
           <div className="column">
             <Button classNames={['is-danger']} onClick={handleOnCancel}>exit</Button>
