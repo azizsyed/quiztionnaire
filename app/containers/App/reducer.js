@@ -14,6 +14,7 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
+  LOAD_FEATURED_TESTS_SUCCESS,
 } from './constants';
 import { fromJS } from 'immutable';
 
@@ -25,6 +26,7 @@ const initialState = fromJS({
   userData: fromJS({
     repositories: false,
   }),
+  featuredTests: [],
 });
 
 function appReducer(state = initialState, action) {
@@ -43,6 +45,8 @@ function appReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+    case LOAD_FEATURED_TESTS_SUCCESS:
+      return state.set('featuredTests', action.payload);
     default:
       return state;
   }

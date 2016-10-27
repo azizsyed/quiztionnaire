@@ -4,8 +4,8 @@
 
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { LOAD_FEATURED_TESTS, LOAD_REPOS } from 'containers/App/constants';
+import { reposLoaded, repoLoadingError, featuredTestsLoaded } from 'containers/App/actions';
 
 import request from 'utils/request';
 import { selectUsername } from 'containers/HomePage/selectors';
@@ -28,12 +28,33 @@ export function* getRepos() {
   }
 }
 
+const tbd = () => firebase.database().ref('/featured/').once('value').then((snapshot) => snapshot.val());
+
+/**
+ * Github repos request/response handler
+ */
+export function* getFeaturedTests() {
+  const featuredTests = yield call(tbd);
+
+  if (!featuredTests.err) {
+    yield put(featuredTestsLoaded(featuredTests));
+  } else {
+    // yield put(repoLoadingError(repos.err));
+  }
+}
+
 /**
  * Watches for LOAD_REPOS action and calls handler
  */
 export function* getReposWatcher() {
   while (yield take(LOAD_REPOS)) {
     yield call(getRepos);
+  }
+}
+
+export function* getFeaturedTestsWatcher() {
+  while (yield take(LOAD_FEATURED_TESTS)) {
+    yield call(getFeaturedTests);
   }
 }
 
@@ -49,7 +70,17 @@ export function* githubData() {
   yield cancel(watcher);
 }
 
+export function* featuredTests() {
+  // Fork watcher so we can continue execution
+  const watcher = yield fork(getFeaturedTestsWatcher);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
 // Bootstrap sagas
 export default [
-  githubData,
+  // githubData,
+  featuredTests,
 ];

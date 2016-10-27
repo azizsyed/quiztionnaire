@@ -16,6 +16,7 @@ import {
   selectRepos,
   selectLoading,
   selectError,
+  selectFeaturedTests,
 } from 'containers/App/selectors';
 
 import {
@@ -23,7 +24,7 @@ import {
 } from './selectors';
 
 import { changeUsername } from './actions';
-import { loadRepos } from '../App/actions';
+import { loadRepos, loadFeaturedTests } from '../App/actions';
 
 import { FormattedMessage } from 'react-intl';
 import RepoListItem from 'containers/RepoListItem';
@@ -40,6 +41,7 @@ export class HomePage extends React.Component {
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
+    this.props.dispatchLoadFeaturedTests();
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
     }
@@ -67,6 +69,8 @@ export class HomePage extends React.Component {
   render() {
     let mainContent = null;
 
+    const { featuredTests } = this.props;
+
     // Show a loading indicator when we're loading
     if (this.props.loading) {
       mainContent = (<List component={LoadingIndicator} />);
@@ -82,29 +86,6 @@ export class HomePage extends React.Component {
     } else if (this.props.repos !== false) {
       mainContent = (<List items={this.props.repos} component={RepoListItem} />);
     }
-
-    const tests = [
-      {
-        id: '1234',
-        questionSetId: 'q.1234',
-        options: {
-          timeLimit: 500, // { Numeric: [0-max_tbd] }
-          targetScore: 70, // {Number percentage [0..100]}
-          allowHints: true, // { Boolean }
-        },
-        title: 'Test #1',
-      },
-      {
-        id: '5678',
-        questionSetId: 'q.5678',
-        options: {
-          timeLimit: 500, // { Numeric: [0-max_tbd] }
-          targetScore: 70, // {Number percentage [0..100]}
-          allowHints: true, // { Boolean }
-        },
-        title: 'Test #2',
-      },
-    ];
 
     return (
       <article>
@@ -123,7 +104,7 @@ export class HomePage extends React.Component {
               <FormattedMessage {...messages.startProjectMessage} />
             </p>
           </section>
-          {tests.map((test) =>
+          {featuredTests.map((test) =>
             <Button handleRoute={this.openQuestionPage(test.id, test.questionSetId)}>{test.title}</Button>
           )}
           <section className={styles.textSection}>
@@ -181,8 +162,7 @@ export function mapDispatchToProps(dispatch) {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadRepos());
     },
-
-    dispatch,
+    dispatchLoadFeaturedTests: () => dispatch(loadFeaturedTests())
   };
 }
 
@@ -191,6 +171,7 @@ const mapStateToProps = createStructuredSelector({
   username: selectUsername(),
   loading: selectLoading(),
   error: selectError(),
+  featuredTests: selectFeaturedTests(),
 });
 
 // Wrap the component to inject dispatch and state into it

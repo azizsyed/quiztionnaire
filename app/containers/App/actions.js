@@ -15,11 +15,17 @@
  *    }
  */
 
+import { createAction } from 'redux-actions';
 import {
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
+  LOAD_FEATURED_TESTS,
+  LOAD_FEATURED_TESTS_SUCCESS,
 } from './constants';
+
+export const loadFeaturedTests = createAction(LOAD_FEATURED_TESTS);
+export const featuredTestsLoaded = createAction(LOAD_FEATURED_TESTS_SUCCESS);
 
 /**
  * Load the repositories, this action starts the request saga

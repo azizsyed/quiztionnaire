@@ -26,6 +26,11 @@ const selectRepos = () => createSelector(
   (globalState) => globalState.getIn(['userData', 'repositories'])
 );
 
+const selectFeaturedTests = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('featuredTests', [])
+);
+
 const selectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -49,4 +54,5 @@ export {
   selectError,
   selectRepos,
   selectLocationState,
+  selectFeaturedTests,
 };

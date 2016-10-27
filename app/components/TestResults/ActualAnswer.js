@@ -7,10 +7,6 @@ import { SKIPPED } from '../../containers/QuestionPage/constants';
 function ActualAnswer(props) {
   const { answers } = props;
 
-  console.log(answers);
-
-  debugger;
-
   const answer = (answers && answers.length) ? answers[answers.length - 1] : null;
 
   let display = answer || 'unanswered';

@@ -17,5 +17,17 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.8/typicons.min.css" rel="stylesheet">
     <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically includes all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this HTML file. Don't add any assets here! (Check out webpackconfig.js if you want to know more) -->
+    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBfIJ7GNkE1xLT1mqCSyURyayk7Z96SxXA",
+        authDomain: "quiztionnaire-c53b3.firebaseapp.com",
+        databaseURL: "https://quiztionnaire-c53b3.firebaseio.com",
+        storageBucket: "quiztionnaire-c53b3.appspot.com",
+        messagingSenderId: "309299297541"
+      };
+      firebase.initializeApp(config);
+    </script>
   </body>
 </html>
