@@ -61,8 +61,17 @@ export class HomePage extends React.Component {
   openFeaturesPage = () => {
     this.openRoute('/features');
   };
+
+
   /**
-   * Changed route to '/features'
+   * Changed route to '/generator'
+   */
+  openTestGeneratorPage = () => {
+    this.openRoute('/generate');
+  };
+
+  /**
+   * Changed route to '/question'
    */
   openQuestionPage = (testId, questionId) => () => this.openRoute(`/question/${testId}/${questionId}`);
 
@@ -131,6 +140,9 @@ export class HomePage extends React.Component {
           </section>
           <Button handleRoute={this.openFeaturesPage}>
             <FormattedMessage {...messages.featuresButton} />
+          </Button>
+          <Button handleRoute={this.openTestGeneratorPage}>
+            Test Generator
           </Button>
         </div>
       </article>
