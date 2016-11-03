@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import styles from './styles.css';
 
 function Icon(props) {
-  const { icon } = props;
+  const { icon, onClick = () => {} } = props;
   return (
-    <span className="icon"><i className={`typcn typcn-${icon}`} /></span>
+    <span className="icon" onClick={onClick}><i className={`typcn typcn-${icon}`} /></span>
   );
 }
 
